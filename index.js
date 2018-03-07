@@ -50,6 +50,10 @@ function walk (newNode, oldNode) {
   } else if (newNode.isSameNode && newNode.isSameNode(oldNode)) {
     return oldNode
   } else if (newNode.tagName !== oldNode.tagName) {
+    if (oldNode.tagName && oldNode.parentNode) {
+      oldNode.outerHTML = newNode.outerHTML
+      return oldNode
+    }
     return newNode
   } else {
     morph(newNode, oldNode)
